@@ -1,15 +1,4 @@
-import { useEffect, useState } from "react";
-import { getArticle } from "../utils/articles_api";
-
-export const ArticleBody = ({ article_id }) => {
-  const [article, setArticle] = useState([{}]);
-
-  useEffect(() => {
-    getArticle(article_id).then((article) => {
-      setArticle(article);
-    });
-  }, []);
-
+export const ArticleBody = ({ article }) => {
   return (
     <article className="article">
       <h2>{article.title}</h2>

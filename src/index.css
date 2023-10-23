@@ -78,3 +78,32 @@ p {
   text-align: justify;
   text-justify: inter-word;
 }
+
+.border {
+  border-top: solid #7d7d7d;
+  flex-grow: 1;
+}
+
+.bold-text {
+  font-weight: bold;
+}
+
+.comment-body {
+  font-size: x-small;
+  margin: 0px;
+}
+
+.comment-head {
+  margin: 0px;
+  margin-top: 2vh;
+}
+
+.comment-votes {
+  margin: 0px;
+}
+
+.comment-section {
+  display: flex;
+  flex-direction: column;
+  max-width: 600px;
+}

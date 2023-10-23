@@ -12,7 +12,12 @@ export const getArticleSummaries = () => {
 
 export const getArticle = (article_id) => {
   return articlesAPI.get(`/${article_id}`).then((response) => {
-    console.log(response);
     return response.data.article;
+  });
+};
+
+export const getArticleComments = (article_id) => {
+  return articlesAPI.get(`/${article_id}/comments`).then((response) => {
+    return response.data.comments;
   });
 };
