@@ -1,0 +1,54 @@
+.article-card {
+  display: flex;
+  margin: 10px;
+  background-color: rgb(238, 238, 238);
+  border-radius: 10px;
+  width: 100%;
+  max-width: 400px;
+}
+
+.article-card > img {
+  max-width: 50%;
+  margin-right: 5px;
+  border-radius: inherit;
+  object-fit: cover;
+}
+
+.article-card > summary {
+  max-width: 50%;
+  margin-right: 5px;
+  border-radius: inherit;
+  object-fit: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.article-card > summary > * {
+  margin: 1px;
+}
+
+.article-card-author {
+  font-style: italic;
+}
+
+.article-card-topic {
+  color: rgb(0, 0, 152);
+}
+
+.article-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+#root {
+  font-family: sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+p {
+  font-size: small;
+}
