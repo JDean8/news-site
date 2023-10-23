@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getArticleComments } from "../utils/articles_api";
 
-export const CommentSection = ({ article_id, article }) => {
+export const CommentSection = ({ article_id }) => {
   const [comments, setComments] = useState([{}]);
 
   useEffect(() => {
