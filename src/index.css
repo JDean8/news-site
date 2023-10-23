@@ -5,6 +5,8 @@
   border-radius: 10px;
   width: 100%;
   max-width: 400px;
+  text-decoration: none;
+  color: black;
 }
 
 .article-card > img {
@@ -51,4 +53,28 @@
 
 p {
   font-size: small;
+}
+
+.article {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  max-width: 600px;
+  padding: 5px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.article > * {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.article > img {
+  margin: 0px;
+}
+
+.article-body {
+  text-align: justify;
+  text-justify: inter-word;
 }

@@ -9,3 +9,10 @@ export const getArticleSummaries = () => {
     return response.data.articles;
   });
 };
+
+export const getArticle = (article_id) => {
+  return articlesAPI.get(`/${article_id}`).then((response) => {
+    console.log(response);
+    return response.data.article;
+  });
+};
