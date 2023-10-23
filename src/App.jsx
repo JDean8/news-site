@@ -1,7 +1,7 @@
 import { Header } from "./Components/Header";
 import { ArticleList } from "./Components/ArticleList";
 import { Routes, Route } from "react-router-dom";
-import { Article } from "./Components/Article";
+import { Article } from "./Components/SingleArticle";
 import { Nav } from "./Components/Nav";
 
 function App() {

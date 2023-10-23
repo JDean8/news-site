@@ -1,10 +1,7 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import { getArticle } from "../utils/articles_api";
 
-export const Article = () => {
-  const { article_id } = useParams();
-
+export const ArticleBody = ({ article_id }) => {
   const [article, setArticle] = useState([{}]);
 
   useEffect(() => {
