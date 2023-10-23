@@ -1,6 +1,11 @@
+import { Link } from "react-router-dom";
+
 export const ArticleCard = ({ articleSummary }) => {
   return (
-    <article className="article-card">
+    <Link
+      to={`/articles/${articleSummary.article_id}`}
+      className="article-card"
+    >
       <img src={articleSummary.article_img_url} />
       <summary>
         <h4 className="article-card-heading">{articleSummary.title}</h4>
@@ -13,6 +18,6 @@ export const ArticleCard = ({ articleSummary }) => {
           👍 {articleSummary.votes} 💬 {articleSummary.comment_count}
         </p>
       </summary>
-    </article>
+    </Link>
   );
 };
