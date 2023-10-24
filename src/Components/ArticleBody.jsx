@@ -3,12 +3,16 @@ import { dislikeArticle, getArticle, likeArticle } from "../utils/articles_api";
 
 export const ArticleBody = ({ article_id }) => {
   const [article, setArticle] = useState([{}]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     getArticle(article_id).then((article) => {
       setArticle(article);
+      setIsLoading(false);
     });
   }, [article]);
+
+  if (isLoading) return <h4>Loading...</h4>;
 
   return (
     <article className="article">

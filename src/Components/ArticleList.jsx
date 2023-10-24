@@ -4,12 +4,16 @@ import { ArticleCard } from "./ArticleCard";
 
 export const ArticleList = () => {
   const [articleSummaries, setArticleSummaries] = useState([{}]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     getArticleSummaries().then((summaries) => {
       setArticleSummaries(summaries);
+      setIsLoading(false);
     });
   }, []);
+
+  if (isLoading) return <h4>Loading...</h4>;
 
   return (
     <main className="article-list">
