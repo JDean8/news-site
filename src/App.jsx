@@ -1,14 +1,13 @@
-import { Header } from "./Components/Header";
 import { ArticleList } from "./Components/ArticleList";
 import { Routes, Route } from "react-router-dom";
 import { Article } from "./Components/SingleArticle";
-import { Nav } from "./Components/Nav";
+import { NewsSiteNav } from "./Components/NewsSiteNav";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   return (
     <>
-      <Header />
-      <Nav />
+      <NewsSiteNav />
       <Routes>
         <Route path="/articles" element={<ArticleList />} />
         <Route path="/articles/:article_id" element={<Article />} />

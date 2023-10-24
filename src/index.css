@@ -14,6 +14,7 @@
   margin-right: 5px;
   border-radius: inherit;
   object-fit: cover;
+  min-height: 200px;
 }
 
 .article-card > summary {
@@ -42,6 +43,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  max-width: 2000px;
 }
 
 #root {
@@ -60,9 +62,6 @@ p {
   flex-direction: column;
   width: 100vw;
   max-width: 600px;
-  padding: 5px;
-  margin-left: 5px;
-  margin-right: 5px;
 }
 
 .article > * {
@@ -138,4 +137,8 @@ nav > * {
 .comment-submit {
   float: right;
   margin-left: auto;
+}
+
+h4 {
+  font-size: large;
 }

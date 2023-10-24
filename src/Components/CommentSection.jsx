@@ -35,18 +35,18 @@ export const CommentSection = ({ article_id }) => {
   const commentBox = (
     <form onSubmit={handleSumbit} className="comment-form">
       <label htmlFor="new-comment">New comment:</label>
-      <input
+      <textarea
         className="comment-box"
         id="new-comment"
         value={newComment}
         onChange={(event) => setNewComment(event.target.value)}
-      ></input>{" "}
+      ></textarea>{" "}
       <button className="comment-submit">Post comment</button>
       <p id="comment-error" className="error-text"></p>
     </form>
   );
 
-  if (isLoading) return <h4>Loading...</h4>;
+  if (isLoading) return <h5>Loading...</h5>;
 
   if (comments.length === 0) {
     return (
