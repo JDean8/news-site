@@ -1,16 +1,18 @@
 import { useEffect, useState } from "react";
-import { dislikeArticle, getArticle, likeArticle } from "../utils/articles_api";
+import { voteArticle, getArticle } from "../utils/articles_api";
 
 export const ArticleBody = ({ article_id }) => {
   const [article, setArticle] = useState([{}]);
   const [isLoading, setIsLoading] = useState(true);
+  const [votes, setVotes] = useState(0);
 
   useEffect(() => {
     getArticle(article_id).then((article) => {
       setArticle(article);
       setIsLoading(false);
+      setVotes(article.votes);
     });
-  }, [article]);
+  }, []);
 
   if (isLoading) return <h4>Loading...</h4>;
 
@@ -25,19 +27,35 @@ export const ArticleBody = ({ article_id }) => {
       <p>
         <button
           onClick={() => {
-            likeArticle(article.article_id, setArticle);
+            setVotes((currentVote) => {
+              return (currentVote += 1);
+            });
+            voteArticle(article.article_id, 1).catch((err) => {
+              let error = document.getElementById(
+                `article-vote-error-${article_id}`
+              );
+              error.innerText = " - Serverside error, please try again later";
+            });
           }}
         >
           👍
         </button>{" "}
         <button
           onClick={() => {
-            dislikeArticle(article.article_id, setArticle);
+            setVotes((currentVote) => {
+              return (currentVote -= 1);
+            });
+            voteArticle(article.article_id, -1).catch((err) => {
+              let error = document.getElementById(
+                `article-vote-error-${article_id}`
+              );
+              error.innerText = " - Serverside error, please try again later";
+            });
           }}
         >
           👎
         </button>{" "}
-        {article.votes}
+        {votes}
         <span
           id={`article-vote-error-${article.article_id}`}
           className="error-text"
