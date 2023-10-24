@@ -5,9 +5,9 @@ import { UserContext } from "../Context/UserContext";
 export const Nav = () => {
   const { user } = useContext(UserContext);
   return (
-    <>
+    <nav>
       <Link to="/articles">Articles</Link>
       <p>Logged in as: {user}</p>
-    </>
+    </nav>
   );
 };
