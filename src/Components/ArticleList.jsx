@@ -13,7 +13,7 @@ export const ArticleList = () => {
     });
   }, []);
 
-  if (isLoading) return <h4>Loading...</h4>;
+  if (isLoading) return <h5>Loading...</h5>;
 
   return (
     <main className="article-list">
