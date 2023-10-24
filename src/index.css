@@ -107,3 +107,8 @@ p {
   flex-direction: column;
   max-width: 600px;
 }
+
+.error-text {
+  font-weight: bold;
+  color: red;
+}
