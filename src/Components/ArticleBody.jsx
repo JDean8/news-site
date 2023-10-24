@@ -14,6 +14,19 @@ export const ArticleBody = ({ article_id }) => {
     });
   }, []);
 
+  const handleVote = (increment) => {
+    setVotes((currentVote) => {
+      return (currentVote += increment);
+    });
+    voteArticle(article.article_id, increment).catch((err) => {
+      let error = document.getElementById(`article-vote-error-${article_id}`);
+      error.innerText = " - Serverside error, please try again later";
+      setVotes((currentVote) => {
+        return (currentVote -= increment);
+      });
+    });
+  };
+
   if (isLoading) return <h4>Loading...</h4>;
 
   return (
@@ -27,30 +40,14 @@ export const ArticleBody = ({ article_id }) => {
       <p>
         <button
           onClick={() => {
-            setVotes((currentVote) => {
-              return (currentVote += 1);
-            });
-            voteArticle(article.article_id, 1).catch((err) => {
-              let error = document.getElementById(
-                `article-vote-error-${article_id}`
-              );
-              error.innerText = " - Serverside error, please try again later";
-            });
+            handleVote(1);
           }}
         >
           👍
         </button>{" "}
         <button
           onClick={() => {
-            setVotes((currentVote) => {
-              return (currentVote -= 1);
-            });
-            voteArticle(article.article_id, -1).catch((err) => {
-              let error = document.getElementById(
-                `article-vote-error-${article_id}`
-              );
-              error.innerText = " - Serverside error, please try again later";
-            });
+            handleVote(-1);
           }}
         >
           👎
