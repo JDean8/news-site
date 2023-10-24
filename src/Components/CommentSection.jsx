@@ -35,12 +35,12 @@ export const CommentSection = ({ article_id }) => {
   const commentBox = (
     <form onSubmit={handleSumbit} className="comment-form">
       <label htmlFor="new-comment">New comment:</label>
-      <input
+      <textarea
         className="comment-box"
         id="new-comment"
         value={newComment}
         onChange={(event) => setNewComment(event.target.value)}
-      ></input>{" "}
+      ></textarea>{" "}
       <button className="comment-submit">Post comment</button>
       <p id="comment-error" className="error-text"></p>
     </form>
