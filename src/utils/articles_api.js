@@ -25,3 +25,11 @@ export const getArticleComments = (article_id) => {
 export const voteArticle = (article_id, increment) => {
   return articlesAPI.patch(`/${article_id}`, { inc_votes: increment });
 };
+
+export const postComment = (article_id, user, body) => {
+  return articlesAPI
+    .post(`/${article_id}/comments`, { username: user, body })
+    .then((response) => {
+      return response.data.comment;
+    });
+};
