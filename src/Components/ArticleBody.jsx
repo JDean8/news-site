@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getArticle } from "../utils/articles_api";
+import { dislikeArticle, getArticle, likeArticle } from "../utils/articles_api";
 
 export const ArticleBody = ({ article_id }) => {
   const [article, setArticle] = useState([{}]);
@@ -8,7 +8,7 @@ export const ArticleBody = ({ article_id }) => {
     getArticle(article_id).then((article) => {
       setArticle(article);
     });
-  }, []);
+  }, [article]);
 
   return (
     <article className="article">
@@ -18,7 +18,27 @@ export const ArticleBody = ({ article_id }) => {
         {article.author} - {new Date(article.created_at).toDateString()}
       </h4>
       <p className="article-body">{article.body}</p>
-      <p>👍 {article.votes}</p>
+      <p>
+        <button
+          onClick={() => {
+            likeArticle(article.article_id, setArticle);
+          }}
+        >
+          👍
+        </button>{" "}
+        <button
+          onClick={() => {
+            dislikeArticle(article.article_id, setArticle);
+          }}
+        >
+          👎
+        </button>{" "}
+        {article.votes}
+        <span
+          id={`article-vote-error-${article.article_id}`}
+          className="error-text"
+        ></span>
+      </p>
     </article>
   );
 };
