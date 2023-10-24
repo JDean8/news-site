@@ -1,5 +1,13 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { UserContext } from "../Context/UserContext";
 
 export const Nav = () => {
-  return <Link to="/articles">Articles</Link>;
+  const { user } = useContext(UserContext);
+  return (
+    <>
+      <Link to="/articles">Articles</Link>
+      <p>Logged in as: {user}</p>
+    </>
+  );
 };
