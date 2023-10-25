@@ -6,7 +6,6 @@ const topicsAPI = axios.create({
 
 export const getTopics = () => {
   return topicsAPI.get("/").then((response) => {
-    console.log(response.data.topics);
     return response.data.topics;
   });
 };

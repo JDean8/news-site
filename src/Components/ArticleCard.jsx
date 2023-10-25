@@ -8,7 +8,7 @@ export const ArticleCard = ({ articleSummary }) => {
     >
       <img src={articleSummary.article_img_url} />
       <summary>
-        <h4 className="article-card-heading">{articleSummary.title}</h4>
+        <h2 className="article-card-heading">{articleSummary.title}</h2>
         <p className="article-card-author">{articleSummary.author}</p>
         <p className="article-card-topic">{articleSummary.topic}</p>
         <p className="article-card-date">

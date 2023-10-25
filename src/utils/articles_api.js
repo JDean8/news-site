@@ -4,10 +4,8 @@ const articlesAPI = axios.create({
   baseURL: "https://news-api-vzif.onrender.com/api/articles",
 });
 
-export const getArticleSummaries = (topic) => {
-  let queryString = "/";
-  if (topic) queryString += `?topic=${topic}`;
-  return articlesAPI.get(queryString).then((response) => {
+export const getArticleSummaries = (params) => {
+  return articlesAPI.get("/", { params }).then((response) => {
     return response.data.articles;
   });
 };
