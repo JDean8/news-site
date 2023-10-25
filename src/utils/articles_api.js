@@ -4,16 +4,10 @@ const articlesAPI = axios.create({
   baseURL: "https://news-api-vzif.onrender.com/api/articles",
 });
 
-export const getArticleSummaries = (topic) => {
-  return articlesAPI
-    .get("/", {
-      params: {
-        topic,
-      },
-    })
-    .then((response) => {
-      return response.data.articles;
-    });
+export const getArticleSummaries = (params) => {
+  return articlesAPI.get("/", { params }).then((response) => {
+    return response.data.articles;
+  });
 };
 
 export const getArticle = (article_id) => {
