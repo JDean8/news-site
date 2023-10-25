@@ -5,13 +5,12 @@ import { useSearchParams, Link } from "react-router-dom";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 
+let count = 0;
+
 export const ArticleList = () => {
   const [articleSummaries, setArticleSummaries] = useState([{}]);
   const [isLoading, setIsLoading] = useState(true);
   const [searchParams, setSearchParams] = useSearchParams();
-
-  let topic = searchParams.get("topic");
-  let sort_by = searchParams.get("sort_by");
 
   useEffect(() => {
     getArticleSummaries(searchParams).then((summaries) => {
@@ -20,11 +19,20 @@ export const ArticleList = () => {
     });
   }, [searchParams]);
 
-  function sortByUpdater(sort_by) {
+  count++;
+  console.log(count);
+
+  function queryUpdater({ set_sort_by, set_order }) {
     setSearchParams((currentSearchParams) => {
-      let newParams = { ...currentSearchParams };
-      if (sort_by) newParams.sort_by = sort_by;
-      if (topic) newParams.topic = topic;
+      let newParams = {};
+      if (currentSearchParams.get("sort_by"))
+        newParams.sort_by = currentSearchParams.get("sort_by");
+      if (currentSearchParams.get("topic"))
+        newParams.topic = currentSearchParams.get("topic");
+      if (currentSearchParams.get("order"))
+        newParams.order = currentSearchParams.get("order");
+      if (set_sort_by) newParams.sort_by = set_sort_by;
+      if (set_order) newParams.order = set_order;
       return newParams;
     });
   }
@@ -38,7 +46,7 @@ export const ArticleList = () => {
           <Dropdown.Item
             as="button"
             onClick={() => {
-              sortByUpdater("comment_count");
+              queryUpdater({ set_sort_by: "comment_count" });
             }}
           >
             Comment Count
@@ -46,7 +54,7 @@ export const ArticleList = () => {
           <Dropdown.Item
             as="button"
             onClick={() => {
-              sortByUpdater("created_at");
+              queryUpdater({ set_sort_by: "created_at" });
             }}
           >
             Created
@@ -54,15 +62,29 @@ export const ArticleList = () => {
           <Dropdown.Item
             as="button"
             onClick={() => {
-              sortByUpdater("votes");
+              queryUpdater({ set_sort_by: "votes" });
             }}
           >
             Votes
           </Dropdown.Item>
         </DropdownButton>
         <DropdownButton id="dropdown-item-button  btn-sm" title="Order">
-          <Dropdown.Item as="button">descending</Dropdown.Item>
-          <Dropdown.Item as="button">ascending</Dropdown.Item>
+          <Dropdown.Item
+            as="button"
+            onClick={() => {
+              queryUpdater({ set_order: "desc" });
+            }}
+          >
+            descending
+          </Dropdown.Item>
+          <Dropdown.Item
+            as="button"
+            onClick={() => {
+              queryUpdater({ set_order: "asc" });
+            }}
+          >
+            ascending
+          </Dropdown.Item>
         </DropdownButton>
       </nav>
 
