@@ -5,11 +5,15 @@ const articlesAPI = axios.create({
 });
 
 export const getArticleSummaries = (topic) => {
-  let queryString = "/";
-  if (topic) queryString += `?topic=${topic}`;
-  return articlesAPI.get(queryString).then((response) => {
-    return response.data.articles;
-  });
+  return articlesAPI
+    .get("/", {
+      params: {
+        topic,
+      },
+    })
+    .then((response) => {
+      return response.data.articles;
+    });
 };
 
 export const getArticle = (article_id) => {

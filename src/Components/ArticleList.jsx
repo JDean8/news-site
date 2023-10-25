@@ -14,11 +14,10 @@ export const ArticleList = () => {
     getArticleSummaries(topic).then((summaries) => {
       setArticleSummaries(summaries);
       setIsLoading(false);
-      console.log("Am i looping?");
     });
   }, [searchParams]);
 
-  if (isLoading) return <h5>Loading...</h5>;
+  if (isLoading) return <h2>Loading...</h2>;
 
   return (
     <main className="article-list">
