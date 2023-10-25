@@ -5,8 +5,6 @@ import { useSearchParams, Link } from "react-router-dom";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 
-let count = 0;
-
 export const ArticleList = () => {
   const [articleSummaries, setArticleSummaries] = useState([{}]);
   const [isLoading, setIsLoading] = useState(true);
@@ -18,9 +16,6 @@ export const ArticleList = () => {
       setIsLoading(false);
     });
   }, [searchParams]);
-
-  count++;
-  console.log(count);
 
   function queryUpdater({ set_sort_by, set_order }) {
     setSearchParams((currentSearchParams) => {
