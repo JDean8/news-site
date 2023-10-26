@@ -20,12 +20,11 @@ export const ArticleList = () => {
   function queryUpdater({ set_sort_by, set_order }) {
     setSearchParams((currentSearchParams) => {
       let newParams = {};
-      if (currentSearchParams.get("sort_by"))
-        newParams.sort_by = currentSearchParams.get("sort_by");
-      if (currentSearchParams.get("topic"))
-        newParams.topic = currentSearchParams.get("topic");
-      if (currentSearchParams.get("order"))
-        newParams.order = currentSearchParams.get("order");
+      for (const key of currentSearchParams.keys()) {
+        if (currentSearchParams.get(key)) {
+          newParams[key] = currentSearchParams.get(key);
+        }
+      }
       if (set_sort_by) newParams.sort_by = set_sort_by;
       if (set_order) newParams.order = set_order;
       return newParams;
