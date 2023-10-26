@@ -1,17 +1,23 @@
 import { useEffect, useState } from "react";
 import { voteArticle, getArticle } from "../utils/articles_api";
+import { Error } from "./Error";
 
 export const ArticleBody = ({ article_id }) => {
   const [article, setArticle] = useState([{}]);
   const [isLoading, setIsLoading] = useState(true);
   const [votes, setVotes] = useState(0);
+  const [error404, setError404] = useState(false);
 
   useEffect(() => {
-    getArticle(article_id).then((article) => {
-      setArticle(article);
-      setIsLoading(false);
-      setVotes(article.votes);
-    });
+    getArticle(article_id)
+      .then((article) => {
+        setArticle(article);
+        setIsLoading(false);
+        setVotes(article.votes);
+      })
+      .catch((err) => {
+        setError404(true);
+      });
   }, []);
 
   const handleVote = (increment) => {
@@ -26,6 +32,8 @@ export const ArticleBody = ({ article_id }) => {
       });
     });
   };
+
+  if (error404) return <Error message="No such article found" />;
 
   if (isLoading) return <h4>Loading...</h4>;
 
