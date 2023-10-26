@@ -57,7 +57,6 @@ export const ArticleList = () => {
   const pageBar = () => {
     let items = [];
     for (let i = 1; i <= numPages; i++) {
-      console.log(page);
       items.push(
         <Pagination.Item
           onClick={() => {
