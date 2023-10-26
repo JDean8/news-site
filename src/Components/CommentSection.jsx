@@ -9,13 +9,17 @@ export const CommentSection = ({ article_id }) => {
   const [newComment, setNewComment] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [commentDeleted, setCommentDeleted] = useState(false);
+  const [error404, setError404] = useState(false);
 
   useEffect(() => {
-    getArticleComments(article_id).then((comments) => {
-      setComments(comments);
-      setIsLoading(false);
-      console.log("looping?");
-    });
+    getArticleComments(article_id)
+      .then((comments) => {
+        setComments(comments);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        setError404(true);
+      });
   }, []);
 
   const handleSumbit = (event) => {
@@ -70,6 +74,8 @@ export const CommentSection = ({ article_id }) => {
       <p id="comment-error" className="error-text"></p>
     </form>
   );
+
+  if (error404) return;
 
   if (isLoading) return <h5>Loading...</h5>;
 

@@ -4,17 +4,23 @@ import { ArticleCard } from "./ArticleCard";
 import { useSearchParams, Link } from "react-router-dom";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
+import { Error } from "./Error";
 
 export const ArticleList = () => {
   const [articleSummaries, setArticleSummaries] = useState([{}]);
   const [isLoading, setIsLoading] = useState(true);
   const [searchParams, setSearchParams] = useSearchParams();
+  const [error400, setError400] = useState(false);
 
   useEffect(() => {
-    getArticleSummaries(searchParams).then((summaries) => {
-      setArticleSummaries(summaries);
-      setIsLoading(false);
-    });
+    getArticleSummaries(searchParams)
+      .then((summaries) => {
+        setArticleSummaries(summaries);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        if (err.code === "ERR_BAD_REQUEST") setError400(true);
+      });
   }, [searchParams]);
 
   function queryUpdater({ set_sort_by, set_order }) {
@@ -30,6 +36,9 @@ export const ArticleList = () => {
       return newParams;
     });
   }
+
+  if (error400)
+    return <Error code="400" message="Those queries aren't valid" />;
 
   if (isLoading) return <h2>Loading...</h2>;
 
