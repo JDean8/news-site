@@ -142,3 +142,11 @@ nav > * {
 h2 {
   font-size: large;
 }
+
+.deleting {
+  color: red;
+}
+
+.deleted {
+  visibility: hidden;
+}
