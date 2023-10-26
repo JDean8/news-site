@@ -150,3 +150,7 @@ h2 {
 .deleted {
   visibility: hidden;
 }
+
+.sort-buttons {
+  margin-top: 5px;
+}

@@ -35,8 +35,12 @@ export const ArticleList = () => {
 
   return (
     <>
-      <nav>
-        <DropdownButton id="dropdown-item-button  btn-sm" title="Sort By">
+      <nav className="sort-buttons">
+        <DropdownButton
+          id="dropdown-item-button  btn-sm"
+          variant="secondary"
+          title="Sort By"
+        >
           <Dropdown.Item
             as="button"
             onClick={() => {
@@ -62,7 +66,11 @@ export const ArticleList = () => {
             Votes
           </Dropdown.Item>
         </DropdownButton>
-        <DropdownButton id="dropdown-item-button  btn-sm" title="Order">
+        <DropdownButton
+          id="dropdown-item-button  btn-sm"
+          title="Order"
+          variant="secondary"
+        >
           <Dropdown.Item
             as="button"
             onClick={() => {
