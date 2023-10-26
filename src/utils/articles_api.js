@@ -6,7 +6,7 @@ const articlesAPI = axios.create({
 
 export const getArticleSummaries = (params) => {
   return articlesAPI.get("/", { params }).then((response) => {
-    return response.data.articles;
+    return { summaries: response.data.articles, count: response.data.count };
   });
 };
 

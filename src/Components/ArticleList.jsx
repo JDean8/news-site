@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { getArticleSummaries } from "../utils/articles_api";
 import { ArticleCard } from "./ArticleCard";
-import { useSearchParams, Link } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
+import Pagination from "react-bootstrap/Pagination";
 import { Error } from "./Error";
 
 export const ArticleList = () => {
@@ -11,19 +12,29 @@ export const ArticleList = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [searchParams, setSearchParams] = useSearchParams();
   const [error400, setError400] = useState(false);
+  const [numPages, setNumPages] = useState(0);
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
     getArticleSummaries(searchParams)
-      .then((summaries) => {
+      .then(({ summaries, count }) => {
         setArticleSummaries(summaries);
         setIsLoading(false);
+        setNumPages(Math.ceil(count / 10));
+        setPage(() => {
+          if (searchParams.get("page")) {
+            return parseInt(searchParams.get("page"));
+          } else {
+            return 1;
+          }
+        });
       })
       .catch((err) => {
         if (err.code === "ERR_BAD_REQUEST") setError400(true);
       });
   }, [searchParams]);
 
-  function queryUpdater({ set_sort_by, set_order }) {
+  function queryUpdater({ set_sort_by, set_order, set_page }) {
     setSearchParams((currentSearchParams) => {
       let newParams = {};
       for (const key of currentSearchParams.keys()) {
@@ -33,6 +44,7 @@ export const ArticleList = () => {
       }
       if (set_sort_by) newParams.sort_by = set_sort_by;
       if (set_order) newParams.order = set_order;
+      if (set_page) newParams.page = set_page;
       return newParams;
     });
   }
@@ -41,6 +53,27 @@ export const ArticleList = () => {
     return <Error code="400" message="Those queries aren't valid" />;
 
   if (isLoading) return <h2>Loading...</h2>;
+
+  const pageBar = () => {
+    let items = [];
+    for (let i = 1; i <= numPages; i++) {
+      console.log(page);
+      items.push(
+        <Pagination.Item
+          onClick={() => {
+            setPage(i);
+            queryUpdater({ set_page: i });
+          }}
+          key={`page-btn-${i}`}
+          active={i === page}
+        >
+          {i}
+        </Pagination.Item>
+      );
+    }
+
+    return <Pagination className="page-bar">{items}</Pagination>;
+  };
 
   return (
     <>
@@ -98,7 +131,7 @@ export const ArticleList = () => {
           </Dropdown.Item>
         </DropdownButton>
       </nav>
-
+      {pageBar()}
       <main className="article-list">
         {articleSummaries.map((articleSummary) => {
           return (
@@ -109,6 +142,7 @@ export const ArticleList = () => {
           );
         })}
       </main>
+      {pageBar()}
     </>
   );
 };
