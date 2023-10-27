@@ -8,7 +8,7 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import { getTopics } from "../utils/topics_api";
 
 export const NewsSiteNav = () => {
-  const { user } = useContext(UserContext);
+  const { user, userImg } = useContext(UserContext);
   const [topics, setTopics] = useState([{}]);
 
   useEffect(() => {
@@ -45,7 +45,9 @@ export const NewsSiteNav = () => {
           </Nav>
         </Navbar.Collapse>
         <Navbar.Collapse className="justify-content-end">
-          <Navbar.Text>Signed in as: {user}</Navbar.Text>
+          <Nav.Link as={Link} to="/profile">
+            <img className="avatar" src={userImg} /> {user}
+          </Nav.Link>
         </Navbar.Collapse>
       </Container>
     </Navbar>

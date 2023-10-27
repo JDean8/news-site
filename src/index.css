@@ -168,3 +168,23 @@ h2 {
   margin-right: 3px;
   margin-left: 3px;
 }
+
+.avatar {
+  border-radius: 50%;
+  max-width: 30px;
+}
+
+.profile-card {
+  width: 18rem;
+  margin-top: 10vh;
+}
+
+.sign-in-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.demo-account {
+  margin-top: 5vh;
+  margin-bottom: 5vh;
+}
