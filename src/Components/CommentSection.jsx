@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { getArticleComments, postComment } from "../utils/articles_api";
 import { UserContext } from "../Context/UserContext";
-import { deleteComment } from "../utils/comments_api";
+import { SingleComment } from "./SingleComment";
 
 export const CommentSection = ({ article_id }) => {
   const { user } = useContext(UserContext);
@@ -38,27 +38,6 @@ export const CommentSection = ({ article_id }) => {
         setComments([newComment, ...comments]);
       });
     }
-  };
-
-  const removeComment = (comment_id) => {
-    setCommentDeleted(false);
-    const commentToRemove = document.getElementById(`comment-${comment_id}`);
-    const deleteButton = document.getElementById(`delete-${comment_id}`);
-    deleteButton.setAttribute("disabled", true);
-    commentToRemove.classList.add("deleting");
-    deleteComment(comment_id)
-      .then(() => {
-        setComments((currentComments) => {
-          return currentComments.filter((comment) => {
-            return comment.comment_id !== comment_id;
-          });
-        });
-        setCommentDeleted(true);
-      })
-      .catch(() => {
-        deleteButton.setAttribute("disabled", false);
-        deleteButton.innerText = "🗑️ - ERROR - COMMENT WAS NOT REMOVED!";
-      });
   };
 
   const commentBox = (
@@ -101,28 +80,12 @@ export const CommentSection = ({ article_id }) => {
         )}
         {comments.map((comment) => {
           return (
-            <article
-              className="comment-box"
-              id={`comment-${comment.comment_id}`}
+            <SingleComment
               key={`comment-${comment.comment_id}`}
-            >
-              <p className="comment-head">
-                <span className="bold-text">{comment.author}</span> -{" "}
-                {new Date(comment.created_at).toDateString()}
-              </p>
-              <p className="comment-body">{comment.body}</p>
-              <p className="comment-votes">👍 {comment.votes}</p>
-              {user === comment.author && (
-                <button
-                  onClick={() => {
-                    removeComment(comment.comment_id);
-                  }}
-                  id={`delete-${comment.comment_id}`}
-                >
-                  🗑️
-                </button>
-              )}
-            </article>
+              comment={comment}
+              setComments={setComments}
+              setCommentDeleted={setCommentDeleted}
+            />
           );
         })}
       </section>

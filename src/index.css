@@ -158,3 +158,13 @@ h2 {
 .page-bar {
   margin-top: 5px;
 }
+
+.comment-buttons {
+  display: flex;
+  align-items: center;
+}
+
+.comment-buttons > * {
+  margin-right: 3px;
+  margin-left: 3px;
+}
