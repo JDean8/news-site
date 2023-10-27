@@ -8,6 +8,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { UserContext } from "./Context/UserContext";
 import { useContext } from "react";
 import { SignIn } from "./Components/SignIn";
+import { HomePage } from "./Components/HomePage";
 
 function App() {
   const { user } = useContext(UserContext);
@@ -20,7 +21,7 @@ function App() {
     <>
       <NewsSiteNav />
       <Routes>
-        <Route path="/" element={<p>Welcome</p>} />
+        <Route path="/" element={<HomePage />} />
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="/articles" element={<ArticleList />} />
         <Route path="/articles/:article_id" element={<Article />} />
