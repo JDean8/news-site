@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { voteArticle, getArticle } from "../utils/articles_api";
 import { Error } from "./Error";
+import { Button } from "react-bootstrap";
 
 export const ArticleBody = ({ article_id }) => {
   const [article, setArticle] = useState([{}]);
@@ -45,27 +46,29 @@ export const ArticleBody = ({ article_id }) => {
         {article.author} - {new Date(article.created_at).toDateString()}
       </h4>
       <p className="article-body">{article.body}</p>
-      <p>
-        <button
+      <section>
+        <Button
+          className="btn-primary btn-sm"
           onClick={() => {
             handleVote(1);
           }}
         >
           👍
-        </button>{" "}
-        <button
+        </Button>{" "}
+        <Button
+          className="btn-primary btn-sm"
           onClick={() => {
             handleVote(-1);
           }}
         >
           👎
-        </button>{" "}
+        </Button>{" "}
         {votes}
         <span
           id={`article-vote-error-${article.article_id}`}
           className="error-text"
         ></span>
-      </p>
+      </section>
     </article>
   );
 };

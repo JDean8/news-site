@@ -9,3 +9,7 @@ export const deleteComment = (comment_id) => {
     return res;
   });
 };
+
+export const likeComment = (comment_id, increment) => {
+  return commentsAPI.patch(`/${comment_id}`, { inc_votes: increment });
+};
